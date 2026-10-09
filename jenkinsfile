@@ -1,10 +1,10 @@
 pipeline {
+    agent any
     environment {
         registry = "khalloufkawtar/tp4"
         registryCredential = 'dockerhub'
         dockerImage = ''
     }
-    agent any
     stages {
         stage('Cloning Git') {
             steps {
@@ -36,8 +36,8 @@ pipeline {
         }
         stage('Deploy image') {
             steps{
-                bat "docker run -d $registry:$BUILD_NUMBER"
+                bat "docker run -d ${registry}:${env.BUILD_NUMBER}"
             }
         }
     }
-}s
+}
